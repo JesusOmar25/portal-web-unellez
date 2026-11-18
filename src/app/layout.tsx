@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Inter } from 'next/font/google'
 
 export const metadata: Metadata = {
   title: "UNELLEZ - Portal Institucional",
   description: "Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora",
 };
+
+export const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+})
 
 export default function RootLayout({
   children,

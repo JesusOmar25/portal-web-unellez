@@ -67,6 +67,7 @@ export interface AvisoImportante {
   mensaje: string;
   textoEnlace: string;
   urlDestino: string;
+  imagenFondoUrl?: string;
   activo: boolean;
 }
 

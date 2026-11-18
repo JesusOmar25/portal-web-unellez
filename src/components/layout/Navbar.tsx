@@ -79,48 +79,49 @@ export default function Navbar({ enlaces }: NavbarProps) {
             </div>
 
             {/* Texto de Marca UNELLEZ */}
-            <span className="text-2xl font-black tracking-tight text-[#F08324]">
+            <span className="font-['Inter'] text-2xl font-black tracking-tight text-[#F08324]">
               UNELLEZ
             </span>
           </Link>
 
           {/* 2. Menú de Navegación Central (Desktop) */}
-          <nav className="hidden md:flex items-center gap-7 lg:gap-8" aria-label="Navegación principal">
-            {enlaces.map((enlace) => {
-              // Comprobamos si el enlace está marcado como activo para aplicar color naranja institucional
-              const esActivo = enlace.esActivo || enlace.url === '/';
+          <div className="flex items-center gap-8 lg:gap-14">
+            <nav className="hidden md:flex items-center gap-7 lg:gap-8" aria-label="Navegación principal">
+              {enlaces.map((enlace) => {
+                // Comprobamos si el enlace está marcado como activo para aplicar color naranja institucional
+                const esActivo = enlace.esActivo || enlace.url === '/';
 
-              return (
-                <Link
-                  key={enlace.id}
-                  href={enlace.url}
-                  className={`text-sm font-medium transition-colors duration-150 relative py-1 ${esActivo
-                    ? 'text-[#F08324] font-semibold'
-                    : 'text-gray-700 hover:text-[#F08324]'
-                    }`}
-                >
-                  {enlace.etiqueta}
-                  {/* Pequeña línea indicadora sutil para el enlace activo */}
-                  {esActivo && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#F08324] rounded-full" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
+                return (
+                  <Link
+                    key={enlace.id}
+                    href={enlace.url}
+                    className={`text-sm font-medium transition-colors duration-150 relative py-1 ${esActivo
+                      ? 'text-[#F08324] font-semibold'
+                      : 'text-gray-700 hover:text-[#F08324]'
+                      }`}
+                  >
+                    {enlace.etiqueta}
+                    {/* Pequeña línea indicadora sutil para el enlace activo */}
+                    {esActivo && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#F08324] rounded-full" />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
 
-          {/* 3. Botón de Acción a la Derecha */}
-          <div className="flex items-center gap-3">
-            <Link
-              href="https://dux.unellez.edu.ve"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-[#F08324] hover:bg-[#d87118] active:bg-[#c26111] rounded-full shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer"
-            >
-              Acceder a Sistema
-            </Link>
+            {/* 3. Botón de Acción a la Derecha */}
+            <div className="flex items-center gap-3">
+              <Link
+                href="https://dux.unellez.edu.ve"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-[#F08324] hover:bg-[#d87118] active:bg-[#c26111] rounded-full shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer"
+              >
+                Acceder a Sistema
+              </Link>
+            </div>
           </div>
-
         </div>
       </div>
     </header>

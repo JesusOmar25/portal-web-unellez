@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { AvisoImportante } from '@/types/cms';
 
@@ -20,39 +21,49 @@ export default function AlertBanner({ aviso }: AlertBannerProps) {
     return null;
   }
 
+  const imagenFondo = aviso.imagenFondoUrl || '/images/alert-banner-bg.png';
+
   return (
-    <section aria-label="Aviso institucional importante" className="w-full my-6">
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#df6812] via-[#F08324] to-[#f59e0b] shadow-md px-6 py-3.5 transition-all">
-        {/* Patrón de brillo de fondo sutil */}
-        <div 
-          className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" 
-          aria-hidden="true"
-        />
-
-        <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-3 text-white">
-          {/* Mensaje central */}
-          <div className="flex items-center gap-2 text-center sm:text-left flex-1 justify-center sm:justify-center">
-            <span className="font-semibold text-sm sm:text-base tracking-wide drop-shadow-xs">
-              {aviso.mensaje}
-            </span>
-          </div>
-
-          {/* Enlace de acción rápida a la derecha */}
-          <Link
-            href={aviso.urlDestino}
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold bg-white/20 hover:bg-white/30 text-white px-4 py-1.5 rounded-full transition-all duration-150 backdrop-blur-xs whitespace-nowrap group cursor-pointer"
-          >
-            <span>{aviso.textoEnlace}</span>
-            <span 
-              className="inline-block transition-transform duration-150 group-hover:translate-x-1" 
+        <section
+          aria-label="Aviso institucional importante"
+          className="w-full max-w-[1440px] mx-auto px-3 sm:px-5 my-4"
+        >
+          <div className="relative overflow-hidden rounded-xl bg-[#F08324] shadow-md px-6 sm:px-10 py-3.5 transition-all">
+            {/* Imagen de fondo institucional de actos de grado */}
+            <Image
+              src={imagenFondo}
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover object-center pointer-events-none"
               aria-hidden="true"
-            >
-              →
-            </span>
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
+            />
 
+              <div className="relative z-10 flex flex-col sm:grid sm:grid-cols-3 items-center gap-2 text-white">
+                <div className="hidden sm:block" aria-hidden="true" />
+
+                {/* Mensaje centrado */}
+                <p className="font-semibold text-sm sm:text-base tracking-wide text-center drop-shadow-xs">
+                  {aviso.mensaje}
+                </p>
+
+                {/* Enlace de acción rápida a la derecha */}
+                <div className="flex justify-center sm:justify-end">
+                  <Link
+                    href={aviso.urlDestino}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-white/95 hover:text-white transition-all duration-150 whitespace-nowrap group cursor-pointer"
+                  >
+                    <span>{aviso.textoEnlace}</span>
+                      <span
+                className="inline-block transition-transform duration-150 group-hover:translate-x-1"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+        </section>
+        );
+}

@@ -63,7 +63,7 @@ const EVENTOS_HERO_MOCK: EventoHero[] = [
     id: 1,
     titulo: 'Titulo De Evento',
     descripcion: 'Descripción de evento algo largo...',
-    imagenUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+    imagenUrl: '/images/hero-aula-unellez.jpg',
     imagenAlt: 'Estudiantes en aula universitaria UNELLEZ',
     urlDetalle: '/eventos/1',
     activo: true,
@@ -138,6 +138,7 @@ const AVISO_GRADO_MOCK: AvisoImportante = {
   mensaje: 'Se acercan pronto los actos de grados',
   textoEnlace: 'Más información',
   urlDestino: '/avisos/actos-de-grado',
+  imagenFondoUrl: '/images/alert-banner-bg.png',
   activo: true,
 };
 
