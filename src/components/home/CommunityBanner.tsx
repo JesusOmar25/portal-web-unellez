@@ -23,7 +23,7 @@ export default function CommunityBanner({
   subtitulo = 'Únete a la UNELLEZ y fórmate con excelencia académica en la universidad que transforma el desarrollo de nuestros llanos venezolanos.',
   textoBoton = 'Conócenos Más',
   enlaceBoton = '/universidad',
-  imagenFondoUrl = 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+  imagenFondoUrl = '/images/community-banner.png',
 }: CommunityBannerProps) {
   return (
     <section className="relative w-full overflow-hidden border-y-2 border-[#F08324] mt-12">

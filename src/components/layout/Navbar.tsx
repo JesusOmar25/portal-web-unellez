@@ -1,4 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
 import type { EnlaceNavegacion } from '@/types/cms';
 
 interface NavbarProps {
@@ -7,12 +11,14 @@ interface NavbarProps {
 
 /**
  * Navbar Institucional UNELLEZ
- * 
- * Es un React Server Component (RSC): se ejecuta y renderiza en el servidor.
- * No incluye 'use client' porque no requiere estado en el navegador (como useState o eventos de click complejos).
+ *
+ * Es un Client Component ('use client') porque gestiona el estado interactivo
+ * del menú desplegable en dispositivos móviles mediante el hook `useState`.
  * Los datos de los enlaces se reciben a través de `props` tipadas desde `src/types/cms.ts`.
  */
 export default function Navbar({ enlaces }: NavbarProps) {
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-xs border-b border-gray-100 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,6 +27,7 @@ export default function Navbar({ enlaces }: NavbarProps) {
           {/* 1. Logotipo UNELLEZ */}
           <Link
             href="/"
+            onClick={() => setMenuAbierto(false)}
             className="flex items-center gap-2.5 group focus:outline-hidden"
             aria-label="Ir a página de inicio UNELLEZ"
           >
@@ -110,20 +117,64 @@ export default function Navbar({ enlaces }: NavbarProps) {
               })}
             </nav>
 
-            {/* 3. Botón de Acción a la Derecha */}
-            <div className="flex items-center gap-3">
-              <Link
-                href="https://dux.unellez.edu.ve"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-[#F08324] hover:bg-[#d87118] active:bg-[#c26111] rounded-full shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer"
+              {/* 3. Botón de Acción a la Derecha (Desktop) */}
+              <div className="hidden md:flex items-center gap-3">
+                <Link
+                  href="/login"
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-[#F08324] hover:bg-[#d87118] active:bg-[#c26111] rounded-full shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer"
+                >
+                  Acceder a Sistema
+                </Link>
+              </div>
+
+              {/* 4. Botón Hamburguesa (Móvil) */}
+              <button
+                type="button"
+                onClick={() => setMenuAbierto((prev) => !prev)}
+                className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-[#F08324] hover:bg-orange-50 transition-colors focus:outline-hidden focus:ring-2 focus:ring-[#F08324]/40 cursor-pointer"
+                aria-label={menuAbierto ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'}
+                aria-expanded={menuAbierto}
               >
-                Acceder a Sistema
-              </Link>
+                {menuAbierto ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
             </div>
           </div>
         </div>
-      </div>
+
+        {/* 5. Panel Desplegable de Navegación (Móvil) */}
+        {menuAbierto && (
+          <div className="md:hidden border-t border-gray-100 bg-white shadow-lg">
+            <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Navegación móvil">
+              {enlaces.map((enlace) => {
+                const esActivo = enlace.esActivo || enlace.url === '/';
+
+                return (
+                  <Link
+                    key={enlace.id}
+                    href={enlace.url}
+                    onClick={() => setMenuAbierto(false)}
+                    className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${esActivo
+                      ? 'text-[#F08324] bg-orange-50 font-semibold'
+                      : 'text-gray-700 hover:text-[#F08324] hover:bg-gray-50'
+                      }`}
+                  >
+                    {enlace.etiqueta}
+                  </Link>
+                );
+              })}
+
+              <div className="pt-3 mt-2 border-t border-gray-100">
+                <Link
+                  href="/login"
+                  onClick={() => setMenuAbierto(false)}
+                  className="w-full inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-[#F08324] hover:bg-[#d87118] active:bg-[#c26111] rounded-full shadow-xs transition-all duration-200 cursor-pointer"
+                >
+                  Acceder a Sistema
+                </Link>
+              </div>
+            </nav>
+          </div>
+        )}
     </header>
   );
 }

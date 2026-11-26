@@ -160,7 +160,7 @@ const NOTICIAS_MOCK: Noticia[] = [
     titulo: 'Talento deportivo de la comunidad universitaria es impulsado con jornada en cancha',
     resumen: 'Estudiantes y trabajadores compartieron en cancha de cara a los JUVINEU 2026.',
     categoria: 'Deportes',
-    imagenUrl: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=800&q=80',
+    imagenUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1000&q=80',
     imagenAlt: 'Relevo de atletismo en pista',
     esDestacadaPrincipal: false,
     esDestacadaSecundaria: true,

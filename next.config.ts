@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* Permitir acceso desde dispositivos en la red local (LAN) durante desarrollo */
+  allowedDevOrigins: [
+    '192.168.9.108',
+    '192.168.*.*',
+    '10.*.*.*',
+    '172.16.*.*',
+    '*.local',
+  ],
   images: {
     remotePatterns: [
       {

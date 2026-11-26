@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { GraduationCap, Monitor, BookOpen, Building2 } from 'lucide-react';
+// import { BookOpen, Building2 } from 'lucide-react';
+import { IconoEgresado, Monitor, LibroAbierto, IconoHospital } from '@/components/icons/CustomIcons';
 import type { DireccionInstitucional, EventoHero } from '@/types/cms';
 
 interface HeroCarouselProps {
@@ -19,15 +20,15 @@ function IconoDireccion({ icono }: { icono: DireccionInstitucional['icono'] }) {
 
   switch (icono) {
     case 'graduation-cap':
-      return <GraduationCap className={claseIcono} strokeWidth={1.8} />;
+      return <IconoEgresado className={claseIcono} />;
     case 'monitor':
-      return <Monitor className={claseIcono} strokeWidth={1.8} />;
+      return <Monitor className={claseIcono} />;
     case 'book-open':
-      return <BookOpen className={claseIcono} strokeWidth={1.8} />;
+      return <LibroAbierto className={claseIcono} />;
     case 'building-2':
-      return <Building2 className={claseIcono} strokeWidth={1.8} />;
+      return <IconoHospital className={claseIcono} />;
     default:
-      return <Building2 className={claseIcono} strokeWidth={1.8} />;
+      return <IconoHospital className={claseIcono} />;
   }
 }
 
@@ -59,7 +60,7 @@ export default function HeroCarousel({ eventos, direcciones }: HeroCarouselProps
           fill
           priority
           sizes="(max-width: 1440px) 100vw, 1440px"
-          className="object-cover object-center transition-all duration-500"
+          className="object-cover object-center transition-all duration-500 pointer-events-none"
         />
 
         {/* Degradado sutil inferior para que destaquen los indicadores sin alterar el tono de la foto */}
@@ -126,11 +127,10 @@ export default function HeroCarousel({ eventos, direcciones }: HeroCarouselProps
                     aria-selected={esActual}
                     aria-label={`Ver evento ${idx + 1}: ${evento.titulo}`}
                     onClick={() => setIndiceActual(idx)}
-                    className={`h-2.5 rounded-full transition-all duration-200 cursor-pointer ${
-                      esActual
-                        ? 'w-2.5 bg-[#F08324] shadow-xs scale-110'
-                        : 'w-2.5 bg-white/60 hover:bg-white'
-                    }`}
+                    className={`h-2.5 rounded-full transition-all duration-200 cursor-pointer ${esActual
+                      ? 'w-2.5 bg-[#F08324] shadow-xs scale-110'
+                      : 'w-2.5 bg-white/60 hover:bg-white'
+                      }`}
                   />
                 );
               })}
