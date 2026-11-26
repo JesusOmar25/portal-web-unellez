@@ -14,6 +14,10 @@
   - `src/components/home/FeaturedNews.tsx`: Grid asimétrico de 12 columnas.
   - `src/components/home/CommunityBanner.tsx`: Banner de comunidad unido al Footer.
   - Verificación local aprobada: `pnpm lint` (0 errores, 2 warnings menores en `VicerrectoradosSection.tsx`) y `pnpm build` (Next.js 16.4.6 + TypeScript OK).
+- **Spec 002 (Pantalla de Login `/login`) COMPLETADA:**
+  - `src/types/cms.ts`: Interfaces `CredencialesLogin`, `UsuarioAutenticado` y `RespuestaAuth`.
+  - `src/services/auth.service.ts`: `iniciarSesion()` con validación Mock y bloque `fetch` comentado para PHP (`/api/v1/auth/login`).
+  - `src/components/auth/LoginForm.tsx` y `src/app/login/page.tsx`: Vista dividida 7/5 cols con identidad visual UNELLEZ y formulario controlado.
 
 ## Decisiones Técnicas Tomadas
 - Paleta institucional: Naranja `#F08324`, Azul oscuro `#0F172A`, Fondo blanco `#FFFFFF`.
@@ -22,4 +26,4 @@
 - Desarrollo en red LAN: `next.config.ts` configurado con `allowedDevOrigins` (`192.168.9.108` y subredes locales) y `package.json` con `dev` en `-H 0.0.0.0` para hidratar Client Components desde móviles/tablets.
 
 ## Próximos Pasos
-- Recibir e implementar la **Spec 002** (ej. vistas internas de `/noticias`, `/noticias/[slug]` o integración real con endpoints PHP).
+- Recibir e implementar la **Spec 003** (ej. vistas internas de `/noticias`, `/noticias/[slug]`, panel CMS o conexión real con endpoints PHP).

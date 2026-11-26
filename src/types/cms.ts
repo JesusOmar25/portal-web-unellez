@@ -129,3 +129,32 @@ export interface DatosPaginaInicio {
   infoInstitucional: InfoInstitucional;
 }
 
+/**
+ * Credenciales enviadas por el operador desde el formulario de login
+ * Endpoint futuro en PHP: `POST /api/v1/auth/login`
+ */
+export interface CredencialesLogin {
+  usuario: string;
+  password: string;
+}
+
+/**
+ * Datos básicos del operador autenticado en el CMS
+ */
+export interface UsuarioAutenticado {
+  id: number;
+  nombre: string;
+  direccion: string;
+  rol: string;
+}
+
+/**
+ * Respuesta estándar del endpoint de autenticación en PHP
+ */
+export interface RespuestaAuth {
+  ok: boolean;
+  token?: string;
+  usuario?: UsuarioAutenticado;
+  mensaje?: string;
+}
+
