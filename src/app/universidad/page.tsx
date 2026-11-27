@@ -36,23 +36,23 @@ export default async function UniversidadPage() {
   }));
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-800 overflow-x-hidden">
-      {/* 1. Header / Navbar Institucional */}
-      <Navbar enlaces={enlacesNavbar} />
+      <div className="min-h-screen flex flex-col bg-white text-slate-800 overflow-x-hidden">
+        {/* 1. Header / Navbar Institucional */}
+        <Navbar enlaces={enlacesNavbar} />
 
-      <main className="flex-1 w-full">
-        {/* 2. Banner Superior "Sobre la Universidad" alineado abajo a la izquierda */}
-        <NewsSectionBanner
-          titulo="Sobre la Universidad"
-          alineacion="izquierda"
-        />
+        <main className="flex-1 w-full">
+          {/* 2. Banner Superior "Sobre la Universidad" alineado abajo a la izquierda */}
+          <NewsSectionBanner
+            titulo="Sobre la Universidad"
+            alineacion="izquierda"
+          />
 
-        {/* 3. Sección Interactiva con 5 Pestañas (Historia, Misión y Visión, etc.) */}
-        <UniversityTabsSection secciones={secciones} />
-      </main>
+          {/* 3. Sección Interactiva con 5 Pestañas (Historia, Misión y Visión, etc.) */}
+          <UniversityTabsSection secciones={secciones} />
+        </main>
 
-      {/* 4. Footer Institucional */}
-      <Footer info={infoInstitucional} />
-    </div>
-  );
+        {/* 4. Footer Institucional */}
+        <Footer info={infoInstitucional} />
+      </div>
+      );
 }

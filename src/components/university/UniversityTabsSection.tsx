@@ -52,8 +52,8 @@ export default function UniversityTabsSection({
                 aria-controls={`panel-${seccion.id}`}
                 onClick={() => setSeccionActivaId(seccion.id)}
                 className={`shrink-0 lg:w-full rounded-xl px-4 py-3 text-left text-sm transition-all duration-200 cursor-pointer border ${esActiva
-                    ? 'bg-gradient-to-b from-white to-orange-50/80 text-[#F08324] font-semibold border-orange-200/70 shadow-md'
-                    : 'bg-white text-slate-700 font-medium border-slate-100 shadow-sm hover:text-[#F08324] hover:border-orange-100 hover:shadow-md'
+                  ? 'bg-gradient-to-b from-white to-orange-50/80 text-[#F08324] font-semibold border-orange-200/70 shadow-md'
+                  : 'bg-white text-slate-700 font-medium border-slate-100 shadow-sm hover:text-[#F08324] hover:border-orange-100 hover:shadow-md'
                   }`}
               >
                 {seccion.etiqueta}
@@ -79,32 +79,32 @@ export default function UniversityTabsSection({
             </p>
           )}
 
-          <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed text-left">
-            {seccionActual.parrafos.map((parrafo, indice) => (
-              <p key={indice}>{parrafo}</p>
-            ))}
-          </div>
-        </div>
-
-        {/* 3. Columna Derecha (3 cols): Galería Vertical de 2 imágenes */}
-        <div className="lg:col-span-3 min-w-0 w-full flex flex-col gap-6">
-          {seccionActual.imagenes.map((imagen, indice) => (
-            <div
-              key={`${seccionActual.id}-img-${indice}`}
-              className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 shadow-sm"
-            >
-              <Image
-                src={imagen.url}
-                alt={imagen.alt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 25vw"
-                className={`object-cover object-center transition-all duration-300 ${imagen.escalaDeGrises ? 'grayscale contrast-105' : ''
-                  }`}
-              />
+            <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed text-left">
+              {seccionActual.parrafos.map((parrafo, indice) => (
+                <p key={indice}>{parrafo}</p>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+          </div>
+
+          {/* 3. Columna Derecha (3 cols): Galería Vertical de 2 imágenes */}
+            <div className="lg:col-span-3 min-w-0 w-full flex flex-col gap-6">
+              {seccionActual.imagenes.map((imagen, indice) => (
+                <div
+                  key={`${seccionActual.id}-img-${indice}`}
+                  className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 shadow-sm"
+                >
+                  <Image
+                    src={imagen.url}
+                    alt={imagen.alt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 25vw"
+                    className={`object-cover object-center transition-all duration-300 ${imagen.escalaDeGrises ? 'grayscale contrast-105' : ''
+                      }`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        );
 }
