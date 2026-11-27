@@ -8,6 +8,7 @@ import type {
   InfoInstitucional,
   DatosPaginaInicio,
 } from '@/types/cms';
+import { obtenerNoticiasDestacadas as obtenerNoticiasDesdeServicio } from '@/services/news.service';
 
 /**
  * Servicio Mock para el CMS UNELLEZ
@@ -142,54 +143,6 @@ const AVISO_GRADO_MOCK: AvisoImportante = {
   activo: true,
 };
 
-const NOTICIAS_MOCK: Noticia[] = [
-  {
-    id: 1,
-    slug: 'talento-deportivo-comunidad-universitaria-impulso-cancha',
-    titulo: 'Talento deportivo de la comunidad universitaria es impulsado con jornada en cancha',
-    resumen: 'Estudiantes y trabajadores compartieron en cancha de cara a los JUVINEU 2026 con destacada participación.',
-    categoria: 'Deportes',
-    imagenUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1000&q=80',
-    imagenAlt: 'Atletas en pista de atletismo',
-    esDestacadaPrincipal: true,
-    fechaPublicacion: '2026-11-10',
-  },
-  {
-    id: 2,
-    slug: 'talento-deportivo-comunidad-universitaria-secundaria',
-    titulo: 'Talento deportivo de la comunidad universitaria es impulsado con jornada en cancha',
-    resumen: 'Estudiantes y trabajadores compartieron en cancha de cara a los JUVINEU 2026.',
-    categoria: 'Deportes',
-    imagenUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1000&q=80',
-    imagenAlt: 'Relevo de atletismo en pista',
-    esDestacadaPrincipal: false,
-    esDestacadaSecundaria: true,
-    fechaPublicacion: '2026-11-09',
-  },
-  {
-    id: 3,
-    slug: 'talento-deportivo-comunidad-universitaria-columna-3',
-    titulo: 'Talento deportivo de la comunidad universitaria es impulsado con jornada en cancha',
-    resumen: 'Estudiantes y trabajadores compartieron en cancha de cara a los JUVINEU 2026.',
-    categoria: 'Deportes',
-    imagenUrl: '',
-    imagenAlt: '',
-    esDestacadaPrincipal: false,
-    fechaPublicacion: '2026-11-08',
-  },
-  {
-    id: 4,
-    slug: 'talento-comunidad-universitaria-columna-3-b',
-    titulo: 'Talento deportivo de la comunidad universitaria es impulsado con jornada en cancha',
-    resumen: 'Jornadas de integración comunitaria entre personal docente y comunidad estudiantil.',
-    categoria: 'Comunidad',
-    imagenUrl: '',
-    imagenAlt: '',
-    esDestacadaPrincipal: false,
-    fechaPublicacion: '2026-11-07',
-  },
-];
-
 const INFO_INSTITUCIONAL_MOCK: InfoInstitucional = {
   nombreInstitucion: 'Universidad Nacional Experimental de los Llanos Occidentales Ezequiel Zamora',
   siglas: 'UNELLEZ',
@@ -234,7 +187,7 @@ export async function obtenerAvisoImportante(): Promise<AvisoImportante | null> 
 }
 
 export async function obtenerNoticiasDestacadas(): Promise<Noticia[]> {
-  return Promise.resolve(NOTICIAS_MOCK);
+  return obtenerNoticiasDesdeServicio();
 }
 
 export async function obtenerInfoInstitucional(): Promise<InfoInstitucional> {

@@ -96,7 +96,7 @@ export default function Navbar({ enlaces }: NavbarProps) {
             <nav className="hidden md:flex items-center gap-7 lg:gap-8" aria-label="Navegación principal">
               {enlaces.map((enlace) => {
                 // Comprobamos si el enlace está marcado como activo para aplicar color naranja institucional
-                const esActivo = enlace.esActivo || enlace.url === '/';
+                const esActivo = Boolean(enlace.esActivo);
 
                 return (
                   <Link
@@ -146,7 +146,7 @@ export default function Navbar({ enlaces }: NavbarProps) {
           <div className="md:hidden border-t border-gray-100 bg-white shadow-lg">
             <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Navegación móvil">
               {enlaces.map((enlace) => {
-                const esActivo = enlace.esActivo || enlace.url === '/';
+                const esActivo = Boolean(enlace.esActivo);
 
                 return (
                   <Link

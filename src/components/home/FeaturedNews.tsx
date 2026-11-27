@@ -57,7 +57,7 @@ export default function FeaturedNews({ noticias }: FeaturedNewsProps) {
         <article className="lg:col-span-6">
           <Link
             href={`/noticias/${principal.slug}`}
-            className="relative flex flex-col justify-end h-full min-h-[320px] lg:min-h-[380px] rounded-2xl overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-300"
+            className="relative flex flex-col justify-end h-full min-h-[320px] lg:min-h-[380px] rounded-2xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-shadow duration-300"
           >
             <Image
               src={principal.imagenUrl}
@@ -87,7 +87,7 @@ export default function FeaturedNews({ noticias }: FeaturedNewsProps) {
           <article className="lg:col-span-3 flex flex-col">
             <Link
               href={`/noticias/${secundaria.slug}`}
-              className="flex flex-col h-full group"
+              className="flex flex-col h-full rounded-2xl p-2 -m-2 group cursor-pointer hover:bg-gray-50/80 hover:shadow-md transition-all duration-200"
             >
               <div className="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden mb-4 bg-gray-100 shadow-xs">
                 <Image
@@ -117,7 +117,7 @@ export default function FeaturedNews({ noticias }: FeaturedNewsProps) {
             >
               <Link
                 href={`/noticias/${noticia.slug}`}
-                className="block group"
+                className="block rounded-xl p-2 -m-2 group cursor-pointer hover:bg-gray-50/80 hover:shadow-sm transition-all duration-200"
               >
                 <span className="inline-block px-2.5 py-0.5 text-[11px] font-semibold text-[#F08324] bg-orange-50 rounded-md mb-2">
                   {noticia.categoria}

@@ -18,12 +18,18 @@
   - `src/types/cms.ts`: Interfaces `CredencialesLogin`, `UsuarioAutenticado` y `RespuestaAuth`.
   - `src/services/auth.service.ts`: `iniciarSesion()` con validación Mock y bloque `fetch` comentado para PHP (`/api/v1/auth/login`).
   - `src/components/auth/LoginForm.tsx` y `src/app/login/page.tsx`: Vista dividida 7/5 cols con identidad visual UNELLEZ y formulario controlado.
+- **Spec 003 (Detalle de Noticia `/noticias/[slug]`) COMPLETADA:**
+  - `src/types/cms.ts`: `Noticia` extendida con `pieFoto?` y `contenido: string[]`, más categorías `'Tecnología'` y `'Universidad'`.
+  - `src/components/news/NewsSectionBanner.tsx`, `RelatedNewsSidebar.tsx` y `src/app/noticias/[slug]/page.tsx`: Vista dinámica Server Component con `generateStaticParams` (9 rutas), `generateMetadata`, `notFound()` y grid 8/4 cols.
+- **Spec 004 (Listado de Noticias `/noticias`) COMPLETADA:**
+  - `src/services/news.service.ts`: Ampliado a 9 noticias mock completas y únicas (`obtenerTodasLasNoticias`, `obtenerNoticiasDestacadas` con `slice(0, 4)`, `obtenerNoticiaPorSlug`, `obtenerNoticiasRelacionadas`).
+  - `src/components/news/EditorialNewsGrid.tsx` y `src/app/noticias/page.tsx`: Grid editorial asimétrico de 2 bloques (4 tarjetas arriba + 5 abajo) con separadores verticales sutiles y enlaces `<Link>` a `/noticias/[slug]`.
 
 ## Decisiones Técnicas Tomadas
 - Paleta institucional: Naranja `#F08324`, Azul oscuro `#0F172A`, Fondo blanco `#FFFFFF`.
-- `HeroCarousel` y `AlertBanner` usan contenedor ancho (`max-w-[1440px]`) para igualar los márgenes laterales de Figma.
+- `HeroCarousel`, `AlertBanner` y `NewsSectionBanner` usan contenedor ancho (`max-w-[1440px]`) para igualar los márgenes laterales de Figma.
 - `src/app/page.tsx` consolida la carga inicial mediante `obtenerDatosHome()`.
 - Desarrollo en red LAN: `next.config.ts` configurado con `allowedDevOrigins` (`192.168.9.108` y subredes locales) y `package.json` con `dev` en `-H 0.0.0.0` para hidratar Client Components desde móviles/tablets.
 
 ## Próximos Pasos
-- Recibir e implementar la **Spec 003** (ej. vistas internas de `/noticias`, `/noticias/[slug]`, panel CMS o conexión real con endpoints PHP).
+- Recibir e implementar la **Spec 005** (ej. secciones institucionales, panel CMS o integración real con endpoints PHP).

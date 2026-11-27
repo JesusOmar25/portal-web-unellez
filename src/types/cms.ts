@@ -74,7 +74,14 @@ export interface AvisoImportante {
 /**
  * Categorías permitidas para noticias del CMS
  */
-export type CategoriaNoticia = 'Deportes' | 'Comunidad' | 'Académico' | 'Investigación' | 'Cultura';
+export type CategoriaNoticia =
+  | 'Deportes'
+  | 'Tecnología'
+  | 'Comunidad'
+  | 'Universidad'
+  | 'Académico'
+  | 'Investigación'
+  | 'Cultura';
 
 /**
  * Representa una noticia universitaria
@@ -88,6 +95,8 @@ export interface Noticia {
   categoria: CategoriaNoticia;
   imagenUrl: string;
   imagenAlt: string;
+  pieFoto?: string; // Pie de foto debajo de la imagen principal en la vista de detalle
+  contenido: string[]; // Párrafos del cuerpo completo de la noticia
   esDestacadaPrincipal: boolean; // Columna izquierda grande (6 columnas en grid)
   esDestacadaSecundaria?: boolean; // Columna central con foto (3 columnas en grid)
   fechaPublicacion: string; // Formato ISO 8601: "YYYY-MM-DD"
