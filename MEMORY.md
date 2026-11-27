@@ -3,33 +3,22 @@
 > Instrucción para el agente: Mantén este archivo en máximo 50 líneas. Actualízalo al terminar cada tarea y borra lo obsoleto.
 
 ## Estado Actual
-- Proyecto en Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS y `pnpm`.
-- Arquitectura desacoplada (API-First) lista para conectar con backend en PHP.
-- **Spec 001 (Home Page) COMPLETADA Y VERIFICADA (Pasos 1 al 8):**
-  - `src/types/cms.ts` y `src/services/cms.service.ts`: Contratos y mocks del CMS.
-  - `src/components/layout/Navbar.tsx` (Client Component con menú móvil hamburguesa `useState` y botón `"Acceder a Sistema"` apuntando a `/login`) y `Footer.tsx`: Layout institucional.
-  - `src/components/home/HeroCarousel.tsx`: Carrusel interactivo + accesos rápidos (`DARSE`, `DITED`, `DISISERBI`, `INSITEZ`).
-  - `src/components/home/VicerrectoradosSection.tsx`: Píldoras interactivas (`VPDS`, `VPDR`, `VIPI`, `VPA`).
-  - `src/components/home/AlertBanner.tsx`: Cintillo de actos de grado con imagen de fondo local (`/images/alert-banner-bg.png`).
-  - `src/components/home/FeaturedNews.tsx`: Grid asimétrico de 12 columnas.
-  - `src/components/home/CommunityBanner.tsx`: Banner de comunidad unido al Footer.
-  - Verificación local aprobada: `pnpm lint` (0 errores, 2 warnings menores en `VicerrectoradosSection.tsx`) y `pnpm build` (Next.js 16.4.6 + TypeScript OK).
-- **Spec 002 (Pantalla de Login `/login`) COMPLETADA:**
-  - `src/types/cms.ts`: Interfaces `CredencialesLogin`, `UsuarioAutenticado` y `RespuestaAuth`.
-  - `src/services/auth.service.ts`: `iniciarSesion()` con validación Mock y bloque `fetch` comentado para PHP (`/api/v1/auth/login`).
-  - `src/components/auth/LoginForm.tsx` y `src/app/login/page.tsx`: Vista dividida 7/5 cols con identidad visual UNELLEZ y formulario controlado.
-- **Spec 003 (Detalle de Noticia `/noticias/[slug]`) COMPLETADA:**
-  - `src/types/cms.ts`: `Noticia` extendida con `pieFoto?` y `contenido: string[]`, más categorías `'Tecnología'` y `'Universidad'`.
-  - `src/components/news/NewsSectionBanner.tsx`, `RelatedNewsSidebar.tsx` y `src/app/noticias/[slug]/page.tsx`: Vista dinámica Server Component con `generateStaticParams` (9 rutas), `generateMetadata`, `notFound()` y grid 8/4 cols.
-- **Spec 004 (Listado de Noticias `/noticias`) COMPLETADA:**
-  - `src/services/news.service.ts`: Ampliado a 9 noticias mock completas y únicas (`obtenerTodasLasNoticias`, `obtenerNoticiasDestacadas` con `slice(0, 4)`, `obtenerNoticiaPorSlug`, `obtenerNoticiasRelacionadas`).
-  - `src/components/news/EditorialNewsGrid.tsx` y `src/app/noticias/page.tsx`: Grid editorial asimétrico de 2 bloques (4 tarjetas arriba + 5 abajo) con separadores verticales sutiles y enlaces `<Link>` a `/noticias/[slug]`.
+- Proyecto en Next.js 16 (App Router, `cacheComponents: true`), React 19, TypeScript, Tailwind CSS y `pnpm`.
+- Arquitectura desacoplada (API-First) lista para conectar con backend REST en PHP.
+- **Spec 001 (Home `/`):** `Navbar` (móvil `useState` + `/login`), `Footer`, `HeroCarousel` (accesos `DARSE`, `DITED`, `DISISERBI`, `INSITEZ`), `VicerrectoradosSection`, `AlertBanner`, `FeaturedNews` y `CommunityBanner`.
+- **Spec 002 (Login `/login`):** `auth.service.ts`, `LoginForm.tsx` y vista dividida 7/5 cols.
+- **Spec 003 (Detalle `/noticias/[slug]`):** `NewsSectionBanner.tsx`, `RelatedNewsSidebar.tsx` y vista dinámica con `generateStaticParams`, `generateMetadata` y `notFound()`.
+- **Spec 004 (Listado `/noticias`):** `news.service.ts` con 9 noticias mock (`obtenerTodasLasNoticias`), `EditorialNewsGrid.tsx` (2 bloques asimétricos).
+- **Spec 005 (Universidad `/universidad`):** `universidad.service.ts`, `UniversityTabsSection.tsx` (5 pestañas) y `NewsSectionBanner` con `alineacion`.
+- **Spec 006 (Subportales `/direcciones/[slug]`):** `direcciones.service.ts`, `SubportalNavbar`, `SubportalHeroCarousel`, `SubportalFeaturedCarousel`, `SubportalLatestArticles` y `layout.tsx` con `<Suspense>`.
+- **Spec 007 (Secciones Subportal):** `SubportalAboutTabs.tsx` (5 pestañas unificadas + avatares con fallback de iniciales), `NewsSectionBanner` con `varianteContenedor="subportal"`, y rutas hijas `nosotros`, `servicios`, `contactos` y `descargas` para las 4 direcciones.
 
 ## Decisiones Técnicas Tomadas
 - Paleta institucional: Naranja `#F08324`, Azul oscuro `#0F172A`, Fondo blanco `#FFFFFF`.
-- `HeroCarousel`, `AlertBanner` y `NewsSectionBanner` usan contenedor ancho (`max-w-[1440px]`) para igualar los márgenes laterales de Figma.
-- `src/app/page.tsx` consolida la carga inicial mediante `obtenerDatosHome()`.
-- Desarrollo en red LAN: `next.config.ts` configurado con `allowedDevOrigins` (`192.168.9.108` y subredes locales) y `package.json` con `dev` en `-H 0.0.0.0` para hidratar Client Components desde móviles/tablets.
+- Portal principal usa banner ancho (`max-w-[1440px]`); subportales de direcciones comparten contenedor `max-w-6xl mx-auto`.
+- Desarrollo en red LAN: `next.config.ts` con `allowedDevOrigins` (`192.168.9.108` y subredes locales) y `dev` con `-H 0.0.0.0`.
+- Todas las rutas dinámicas exportan `generateStaticParams()` para compatibilidad con `cacheComponents: true`.
+- Responsive móvil: `NewsSectionBanner` usa `min-h-[140px] sm:min-h-[200px] lg:min-h-[240px]`; pestañas en `UniversityTabsSection` y `SubportalAboutTabs` usan `min-w-0` + `overflow-x-auto` para evitar desbordamiento en Grid.
 
 ## Próximos Pasos
-- Recibir e implementar la **Spec 005** (ej. secciones institucionales, panel CMS o integración real con endpoints PHP).
+- Recibir e implementar la **Spec 008** (ej. `/estudios`, `/institutos-fundaciones`, panel CMS o conexión real con endpoints PHP).

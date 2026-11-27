@@ -167,3 +167,138 @@ export interface RespuestaAuth {
   mensaje?: string;
 }
 
+/**
+ * Imagen asociada a una sección institucional de "Sobre la Universidad"
+ */
+export interface ImagenSeccionUniversidad {
+  url: string;
+  alt: string;
+  escalaDeGrises?: boolean;
+}
+
+/**
+ * Representa cada pestaña de la vista institucional `/universidad`
+ * Tabla sugerida en PHP: `cms_universidad_secciones`
+ */
+export interface SeccionUniversidad {
+  id: string;
+  etiqueta: string;
+  titulo: string;
+  introDestacada?: string;
+  parrafos: string[];
+  imagenes: ImagenSeccionUniversidad[];
+}
+
+/**
+ * Slide para carruseles de subportales de direcciones (Hero y Destacadas)
+ */
+export interface SlideSubportal {
+  id: string;
+  titulo: string;
+  imagenUrl: string;
+  alt: string;
+}
+
+/**
+ * Artículo breve listado en la columna "Últimos artículos" de un subportal
+ */
+export interface ArticuloSubportal {
+  id: string;
+  slug: string;
+  titulo: string;
+  resumen?: string;
+  imagenUrl?: string;
+}
+
+/**
+ * Miembro directivo o de equipo en la sección "Nosotros" del subportal
+ */
+export interface MiembroEquipo {
+  id: string;
+  nombre: string;
+  cargo: string;
+  fotoUrl?: string;
+}
+
+/**
+ * Grupo de autoridades o gerencias (ej. Fundadores, Equipo de trabajo, Gerentes)
+ */
+export interface GrupoEquipo {
+  titulo: string;
+  miembros: MiembroEquipo[];
+}
+
+/**
+ * Contenido unificado de las 5 pestañas de `/direcciones/[slug]/nosotros`
+ */
+export interface NosotrosSubportal {
+  quienesSomos: {
+    tituloBloque: string;
+    parrafos: string[];
+    gruposEquipo: GrupoEquipo[];
+  };
+  historia: {
+    tituloBloque: string;
+    parrafos: string[];
+  };
+  misionVision: {
+    mision: string;
+    vision: string;
+  };
+  reglamentos: {
+    parrafos: string[];
+    documentos?: { id: string; titulo: string; url: string }[];
+  };
+  estructuraOrganizacional: {
+    descripcion: string;
+    unidades: string[];
+  };
+}
+
+/**
+ * Servicio prestado por una dirección en `/direcciones/[slug]/servicios`
+ */
+export interface ServicioSubportal {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  horario?: string;
+}
+
+/**
+ * Oficina de atención en `/direcciones/[slug]/contactos`
+ */
+export interface OficinaContacto {
+  id: string;
+  nombre: string;
+  ubicacion: string;
+  telefono: string;
+}
+
+/**
+ * Archivo o planilla descargable en `/direcciones/[slug]/descargas`
+ */
+export interface ArchivoDescarga {
+  id: string;
+  titulo: string;
+  url: string;
+  formato?: string;
+}
+
+/**
+ * Configuración y contenido completo de un subportal de dirección
+ * Endpoint futuro en PHP: `GET /api/v1/direcciones/{slug}`
+ */
+export interface DireccionSubportal {
+  slug: 'darse' | 'dited' | 'disiserbi' | 'insitez';
+  siglas: 'DARSE' | 'DITED' | 'DISISERBI' | 'INSITEZ';
+  nombreCompleto: string;
+  slidesHero: SlideSubportal[];
+  destacadas: SlideSubportal[];
+  ultimosArticulos: ArticuloSubportal[];
+  nosotros: NosotrosSubportal;
+  servicios: ServicioSubportal[];
+  oficinas: OficinaContacto[];
+  descargas: ArchivoDescarga[];
+}
+
